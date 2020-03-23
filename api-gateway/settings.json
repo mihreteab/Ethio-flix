@@ -1,0 +1,3 @@
+{
+    "db": "mongodb://localhost:27000/imagini"
+}
