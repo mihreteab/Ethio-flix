@@ -1,0 +1,34 @@
+{
+  "environment": "development",
+  "jwtPublicCert": "./src/config/service.pub",
+  "hydra": {
+    "serviceName": "upload-service",
+    "serviceIP": "",
+    "servicePort": 5001,
+    "serviceType": "upload",
+    "serviceDescription": "upload and manage movie contents",
+    "plugins": {
+      "logger": {
+        "logRequests": true,
+        "elasticsearch": {
+          "host": "localhost",
+          "port": 9200,
+          "index": "hydra"
+        }
+      }
+    },
+    "redis": {
+      "url": "127.0.0.1",
+      "port": 6379,
+      "db": 15
+    },
+    "db": {
+      "name": "mongodb",
+      "host": "0.0.0.0",
+      "port": 27017
+    },
+    "encoder": {
+      "name": "ffmpeg"
+    }
+  }
+}
