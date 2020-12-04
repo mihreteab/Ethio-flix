@@ -4,7 +4,7 @@
  */
 "use strict";
 
-import movieController from "../controller/index";
+import movieController from "../controller/movie/index";
 
 const hydraExpress = require("hydra-express");
 const hydra = hydraExpress.getHydra();
@@ -82,6 +82,26 @@ api.post("/movie/patch", async (req, res) => {
 
 api.post("/movie/delete", async (req, res) => {
   const r = await movieController.deleteMovie(req.body.param);
+  sendResponse(r, res);
+});
+
+api.post("/playlist/post", async (req, res) => {
+  const r = await movieController.postPlaylist(req.body.param);
+  sendResponse(r, res);
+});
+
+api.post("/playlist/get", async (req, res) => {
+  const r = await movieController.getPlaylist(req.body.param);
+  sendResponse(r, res);
+});
+
+api.post("/playlist/patch", async (req, res) => {
+  const r = await movieController.patchPlaylist(req.body.param);
+  sendResponse(r, res);
+});
+
+api.post("/playlist/list", async (req, res) => {
+  const r = await movieController.listPlaylist(req.body.param);
   sendResponse(r, res);
 });
 

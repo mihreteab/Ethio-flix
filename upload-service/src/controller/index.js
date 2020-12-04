@@ -1,6 +1,7 @@
 //import factory modules
 import makeUploadMovie from "./upload_movie";
-import makeGetMovie from "./get_movie";
+import makeGetManifest from "./get_manifest";
+import makeGetSegment from "./get_segment";
 import makePatchMovie from "./patch_movie";
 import makeDeleteMovie from "./delete_movie";
 
@@ -14,13 +15,15 @@ const assertType = (data, type) => {
 
 //dependency injection
 const uploadMovie = makeUploadMovie({ movieFileLogic, assertType });
-const getMovie = makeGetMovie({ movieFileLogic, assertType });
+const getManifest = makeGetManifest({ movieFileLogic, assertType });
+const getSegment = makeGetSegment({ movieFileLogic, assertType });
 const patchMovie = makePatchMovie({ movieFileLogic, assertType });
 const deleteMovie = makeDeleteMovie({ movieFileLogic, assertType });
 
 export default {
   uploadMovie,
-  getMovie,
+  getManifest,
+  getSegment,
   patchMovie,
   deleteMovie,
 };

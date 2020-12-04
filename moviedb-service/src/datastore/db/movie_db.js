@@ -77,11 +77,87 @@ export default function makeMovieDB({ dbOps, CONFIG }) {
     return 1;
   }
 
+  // playlist ops
+  async function writePlaylist(data) {
+    let prop = {
+      db: "ethioflix",
+      table: "playlist",
+    };
+
+    await dbWrite(db, prop, data);
+
+    return 1;
+  }
+
+  async function readPlaylist(f, doc) {
+    let ret,
+      filter = {};
+
+    if (!f) {
+      f = {};
+    }
+
+    if (f.pid) {
+      filter["pid"] = f.pid;
+    }
+
+    let prop = {
+      db: "ethioflix",
+      table: "playlist",
+      filter: filter,
+    };
+
+    let p = await dbRead(db, prop);
+
+    return p;
+  }
+
+  async function updatePlaylist(f, data) {
+    let filter = {};
+
+    if (f.pid) {
+      filter["pid"] = f.pid;
+    }
+
+    let prop = {
+      db: "ethioflix",
+      table: "playlist",
+      filter: filter,
+    };
+
+    await dbUpdate(db, prop, data);
+
+    return 1;
+  }
+
+  async function deletePlaylist(f) {
+    let filter = {};
+
+    if (f.pid) {
+      filter["pid"] = f.pid;
+    }
+
+    let prop = {
+      db: "ethioflix",
+      table: "playlist",
+      filter: filter,
+    };
+
+    await dbDelete(db, prop);
+
+    return 1;
+  }
+
+
    return {
      openMovieDB,
      writeMovie,
      readMovie,
      updateMovie,
      deleteMovie,
+     writePlaylist,
+     readPlaylist,
+     updatePlaylist,
+     deletePlaylist
    };
 }

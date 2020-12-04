@@ -1,5 +1,5 @@
 export default function makeFindMovie({ movieDB }) {
-  return async function read_patient(mid) {
+  return async function findMovie(mid) {
     let m = await movieDB.readMovie({ mid: mid }, null);
 
     if (!m.length) {

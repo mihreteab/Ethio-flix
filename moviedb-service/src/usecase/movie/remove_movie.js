@@ -1,5 +1,5 @@
 export default function makeRemoveMovie({ movieDB }) {
-  return async function removePatient(mid) {
+  return async function removeMovie(mid) {
     let r = await movieDB.readMovie({ mid: mid }, null);
 
     if (r.length != 1) {

@@ -1,6 +1,7 @@
 {
   "environment": "development",
-  "jwtPublicCert": "./src/config/service.pub",
+  "jwtPublicCert": "./src/config/server.pub",
+  "jwtPrivateCert": "./src/config/server.pem",
   "hydra": {
     "serviceName": "moviedb-service",
     "serviceIP": "",

@@ -38,6 +38,37 @@ express.response.sendOk = function (result) {
 
 let api = express.Router();
 
+const CONTENT_TYPE = {
+  MANIFEST: "application/vnd.apple.mpegurl",
+  SEGMENT: "video/MP2T",
+};
+
+const pipeStream = (req, res, type) => {
+  return function (err, stream) {
+    switch (type) {
+      case "manifest":
+        res.setHeader("Content-Type", CONTENT_TYPE.MANIFEST);
+        break;
+      case "segment":
+        res.setHeader("Content-Type", CONTENT_TYPE.SEGMENT);
+        break;
+      default:
+        break;
+    }
+
+    res.statusCode = 200;
+
+    if (req.acceptsCompression) {
+      res.setHeader("content-encoding", "gzip");
+      res.statusCode = 200;
+      const gzip = zlib.createGzip();
+      stream.pipe(gzip).pipe(res);
+    } else {
+      stream.pipe(res, "utf-8");
+    }
+  };
+};
+
 const sendResponse = ({ status, result }, res) => {
   switch (status) {
     case 200:
@@ -64,7 +95,6 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./uploads/");
   },
-
   // By default, multer removes file extensions so let's add them back
   filename: function (req, file, cb) {
     cb(
@@ -77,13 +107,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 api.get("/", (req, res) => {
-  res.sendOk({ greeting: {
-    service_name: "upload",
-    version: "v1.0"
-  } });
+  res.sendOk({
+    greeting: {
+      service_name: "upload",
+      version: "v1.0",
+    },
+  });
 });
 
-api.post("/file/upload", upload.single('movie_file'), async (req, res) => {
+api.post("/file/upload", upload.single("movie_file"), async (req, res) => {
   const param = {
     path: req.file.path,
     mid: req.body.mid,
@@ -92,9 +124,18 @@ api.post("/file/upload", upload.single('movie_file'), async (req, res) => {
   sendResponse(r, res);
 });
 
-api.post("/file/get", async (req, res) => {
-  const r = await uploadController.getFile(req.body.param);
-  sendResponse(r, res);
+api.get("/file/manifest/get/:id", async (req, res) => {
+  const r = await uploadController.getManifest(
+    req.params,
+    pipeStream(req, res, "manifest")
+  );
+});
+
+api.get("/file/segment/get/:path", async (req, res) => {
+  const r = await uploadController.getSegment(
+    req.params,
+    pipeStream(req, res, "segment")
+  );
 });
 
 api.post("/file/delete", async (req, res) => {
