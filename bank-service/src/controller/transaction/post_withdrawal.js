@@ -22,13 +22,29 @@ export default function makePostWithdrawal({ txnLogic, assertType }) {
       };
     }
 
-    let a = await txnLogic.createTransaction(
+    let t = await txnLogic.createTransaction(
       param.user_id,
       param.account_id,
       param.txn
     );
 
-    if (!a) {
+    if (!t) {
+      return {
+        status: 500,
+        result: {
+          msg: "Failed To Make Withdrawal.",
+        },
+      };
+    }
+
+    param.txn.type = "deposite";
+    t = await txnLogic.createTransaction(
+      param.rec_id,
+      param.rec_account_id,
+      param.txn
+    );
+
+    if (!t) {
       return {
         status: 500,
         result: {

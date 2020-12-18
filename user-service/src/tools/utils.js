@@ -21,7 +21,6 @@ let query = {};
 
 export function getQuery(data){
   query = {};
-
   let r = createQuery(data);
 
   return r;
@@ -29,7 +28,6 @@ export function getQuery(data){
 
 
 function createQuery(data, curr){
-
   for(var key in data) {
 
     var value = data[key];
@@ -43,7 +41,7 @@ function createQuery(data, curr){
       query[newKey] = value;
     }
   }
-
+  console.log(query);
   return query;
 }
 

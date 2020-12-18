@@ -1,8 +1,17 @@
 export default {
-  "/movie/post": {
-    allowed: ["producer"],
+  "/account/post": {
+    allowed: ["producer", "subscriber", "admin"],
   },
-  "/movie/get": {
-    allowed: ["producer", "subscriber"],
+  "/account/get": {
+    allowed: ["producer", "subscriber", "admin"],
+  },
+  "/txn/deposite": {
+    allowed: ["producer", "subscriber", "admin"],
+  },
+  "/txn/transfer": {
+    allowed: ["producer", "subscriber", "admin"],
+  },
+  "/txn/balance/get": {
+    allowed: ["producer", "subscriber", "admin"],
   },
 };

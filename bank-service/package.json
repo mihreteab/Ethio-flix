@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon --exec babel-node ./src/bank-service.js",
-    "debug": "node-debug moviedb-service.js --debug-brk",
+    "debug": "node-debug bank-service.js --debug-brk",
     "test": "mocha specs --reporter spec",
     "docker": "node scripts/docker.js"
   },

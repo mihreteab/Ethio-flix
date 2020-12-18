@@ -10,6 +10,7 @@ export default function makeUploadMovie({ movieFileLogic, assertType }) {
         },
       };
     }
+    console.log(param);
     let m = await movieFileLogic.saveMovieFile(param.path, param.mid);
 
     if (!m) {

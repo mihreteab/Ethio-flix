@@ -30,7 +30,7 @@ function getDuration(prop, cb) {
 function createThumbnail(prop) {
   const DESTINATION = "/home/developer/videos";
   ffmpeg(prop.path).screenshots({
-    timestamps: [30],
+    timestamps: [60],
     filename: `${prop.id}.png`,
     folder: DESTINATION,
     size: "320x240",

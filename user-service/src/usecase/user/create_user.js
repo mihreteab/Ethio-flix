@@ -1,19 +1,22 @@
-export default function makeCreateUser({ movieDB, User, generateId, moment, auth }) {
-  return async function createUser({ email, username, password, role, pii }) {
+export default function makeCreateUser({ userDB, User, generateId, moment, auth }) {
+  return async function createUser({ email, password, role, pii }) {
     let hashedPswd = auth.hashPassword(password)
     let user_id = generateId(8);
     let date = moment().unix();
 
-    let user = new User(user_id, email, username, hashedPswd, role, pii, date);
-
-    let u = await movieDB.readUser({ user_id: user.user_id });
+    let user = new User(user_id, email, hashedPswd, role, pii, date);
+    console.log(user);
+    let u = await userDB.readUser({ email: user.security.email }, null);
 
     if (u.length) {
+      console.log(u)
       return null;
     }
 
-    await movieDB.writeUser(user);
+    await userDB.writeUser(user);
 
-    return user.pii;
+    delete user.security;
+    
+    return user;
   };
 }

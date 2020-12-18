@@ -1,6 +1,6 @@
 export default function makeGetBalance({ txnLogic, assertType }) {
   return async function getBalance(param) {
-    if (!assertType(param.account_id, "account_id")) {
+    if (!assertType(param.user_id, "user_id")) {
       return {
         status: 400,
         result: {
@@ -9,13 +9,13 @@ export default function makeGetBalance({ txnLogic, assertType }) {
       };
     }
 
-    let a = await txnLogic.calBalance(param.user_id, param.account_id);
+    let b = await txnLogic.calBalance(param.user_id);
 
-    if (!a) {
+    if (!b) {
       return {
-        status: 404,
+        status: 200,
         result: {
-          msg: "Account Couldn't Be Found.",
+          balance: 0.00,
         },
       };
     }
@@ -23,9 +23,8 @@ export default function makeGetBalance({ txnLogic, assertType }) {
     return {
       status: 200,
       result: {
-        account: a,
+        balance: b,
       },
     };
   };
 }
-

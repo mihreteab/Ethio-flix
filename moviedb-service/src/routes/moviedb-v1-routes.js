@@ -5,6 +5,7 @@
 "use strict";
 
 import movieController from "../controller/movie/index";
+import allowAccess from "../tools/access_ctrl/access_ctrl";
 
 const hydraExpress = require("hydra-express");
 const hydra = hydraExpress.getHydra();
@@ -70,8 +71,13 @@ api.post("/movie/post", async (req, res) => {
   sendResponse(r, res);
 });
 
-api.post("/movie/get", async (req, res) => {
+api.post("/movie/gets", allowAccess, async (req, res) => {
   const r = await movieController.getMovie(req.body.param);
+  sendResponse(r, res);
+});
+
+api.post("/movie/list", allowAccess, async (req, res) => {
+  const r = await movieController.listMovies(req.body.param);
   sendResponse(r, res);
 });
 
@@ -85,7 +91,7 @@ api.post("/movie/delete", async (req, res) => {
   sendResponse(r, res);
 });
 
-api.post("/playlist/post", async (req, res) => {
+api.post("/playlist/post", allowAccess, async (req, res) => {
   const r = await movieController.postPlaylist(req.body.param);
   sendResponse(r, res);
 });

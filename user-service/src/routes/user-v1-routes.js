@@ -80,4 +80,9 @@ api.post("/user/signin", async (req, res) => {
   sendResponse(r, res);
 });
 
+api.post("/user/password/change", async (req, res) => {
+  const r = await userController.changePassword(req.body.param);
+  sendResponse(r, res);
+});
+
 module.exports = api;

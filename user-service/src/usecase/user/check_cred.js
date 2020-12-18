@@ -1,7 +1,7 @@
-export default function makeCheckCred({ movieDB, auth }) {
-  return async function checkCred({ username, password }) {
-    let u = await movieDB.readUser({ username }, null);
-    console.log(u)
+export default function makeCheckCred({ userDB, auth }) {
+  return async function checkCred({ email, password }) {
+    let u = await userDB.readUser({ email }, null);
+    console.log(password)
     if (!u.length) {
       return 0;
     }
@@ -10,6 +10,8 @@ export default function makeCheckCred({ movieDB, auth }) {
       return 0;
     }
 
-    return u[0].user_id;
+    delete u.security;
+
+    return u[0];
   };
 }

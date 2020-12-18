@@ -1,8 +1,14 @@
 export default {
   "/movie/post": {
-    allowed: ["producer"],
+    allowed: ["admin"],
   },
-  "/movie/get": {
-    allowed: ["producer", "subscriber"],
+  "/movie/gets": {
+    allowed: ["subscriber"],
+  },
+  "/movie/list": {
+    allowed: ["subscriber", "producer"],
+  },
+  "/playlist/post": {
+    allowed: ["subscriber"],
   },
 };

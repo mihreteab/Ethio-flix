@@ -5,7 +5,7 @@
   "hydra": {
     "serviceName": "moviedb-service",
     "serviceIP": "",
-    "servicePort": 5000,
+    "servicePort": 5008,
     "serviceType": "moviedb",
     "serviceDescription": "store and manage movie information on database",
     "plugins": {

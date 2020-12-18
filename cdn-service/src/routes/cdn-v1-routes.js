@@ -38,6 +38,7 @@ let api = express.Router();
 const CONTENT_TYPE = {
   MANIFEST: "application/vnd.apple.mpegurl",
   SEGMENT: "video/MP2T",
+  THUMB: "image/png",
 };
 
 const pipeStream = (req, res, type) => {
@@ -48,6 +49,9 @@ const pipeStream = (req, res, type) => {
         break;
       case "segment":
         res.setHeader("Content-Type", CONTENT_TYPE.SEGMENT);
+        break;
+      case "thumbnail":
+        res.setHeader("Content-Type", CONTENT_TYPE.THUMB);
         break;
       default:
         break;
@@ -110,6 +114,13 @@ api.get("/file/segment/get/:path", async (req, res) => {
   const r = await cdnController.getSegment(
     req.params,
     pipeStream(req, res, "segment")
+  );
+});
+
+api.get("/file/thumbnail/get/:path", async (req, res) => {
+  const r = await cdnController.getThumb(
+    req.params,
+    pipeStream(req, res, "thumbnail")
   );
 });
 

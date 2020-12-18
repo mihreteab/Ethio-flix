@@ -22,6 +22,7 @@
     "fwsp-jwt-auth": "0.1.0",
     "fwsp-logger": "0.4.0",
     "fwsp-server-response": "2.2.6",
+    "get-video-duration": "^3.0.2",
     "hydra-express": "1.7.2",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",

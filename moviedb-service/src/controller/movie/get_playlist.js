@@ -20,6 +20,11 @@ export default function makeGetPlaylist({ movieLogic, assertType }) {
       };
     }
 
+
+    for (let i = 0; i < pl.movies.length; i++) {
+      pl.movies[i] = await movieLogic.findMovie(pl.movies[i]);
+    }
+
     return {
       status: 200,
       result: {

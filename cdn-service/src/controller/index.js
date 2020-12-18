@@ -1,6 +1,7 @@
 //import factory modules
 import makeGetManifest from "./get_manifest";
 import makeGetSegment from "./get_segment";
+import makeGetThumb from "./get_thumb";
 
 //import dependencies
 import cdnLogic from "../usecase/movie/index";
@@ -13,8 +14,10 @@ const assertType = (data, type) => {
 //dependency injection
 const getManifest = makeGetManifest({ cdnLogic, assertType });
 const getSegment = makeGetSegment({ cdnLogic, assertType });
+const getThumb = makeGetThumb({ cdnLogic, assertType });
 
 export default {
   getManifest,
   getSegment,
+  getThumb,
 };

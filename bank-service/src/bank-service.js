@@ -4,7 +4,7 @@
  * @description store and manage movie information on database
  */
 "use strict";
-import { movieDB } from "./datastore/db/index";
+import { bankDB } from "./datastore/db/index";
 import { dbLoad } from "./drivers/database/index";
 import { createToken } from "./tools/auth";
 
@@ -23,7 +23,7 @@ let config = require("fwsp-config");
 
 async function startService() {
   await dbLoad();
-  movieDB.openMovieDB().then(
+  bankDB.openBankDB().then(
     () => {
       config
         .init("./src/config/config.json")
@@ -34,7 +34,7 @@ async function startService() {
         .then((status) => {
           return hydraExpress.init(config.getObject(), version, () => {
             hydraExpress.registerRoutes({
-              "/moviedb/v1": require("./routes/moviedb-v1-routes"),
+              "/bank/v1": require("./routes/bank-v1-routes"),
             });
           });
         })

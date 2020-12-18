@@ -1,6 +1,6 @@
 export default function makePostPlaylist({ movieLogic, assertType }) {
   return async function postPlaylist(param) {
-    if (!assertType(param.movie, "pd")) {
+    if (!assertType(param.movie, "mid")) {
       return {
         status: 400,
         result: {
@@ -8,8 +8,8 @@ export default function makePostPlaylist({ movieLogic, assertType }) {
         },
       };
     }
-
-    let pl = await movieLogic.createPlaylist(null, param.movie);
+    console.log(param);
+    let pl = await movieLogic.createPlaylist(param.user_id, param.name, param.movie);
 
     if (!pl) {
       return {

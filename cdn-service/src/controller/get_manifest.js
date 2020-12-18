@@ -12,7 +12,7 @@ export default function makeGetManifest({ cdnLogic, assertType }) {
 
 
     let m = await cdnLogic.readManifest(
-      `${VIDEOS_PATH}${param.id}.m3u8`,
+      `${VIDEOS_PATH}${param.id}`,
       cb
     );
     if (!m) {

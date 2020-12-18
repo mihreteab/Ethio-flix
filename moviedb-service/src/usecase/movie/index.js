@@ -4,6 +4,7 @@ import moment from 'moment'
 //import factory modules
 import makeCreateMovie from "./create_movie";
 import makeFindMovie from "./find_movie";
+import makeListMovies from "./list_movies";
 import makeModifyMovie from "./modify_movie";
 import makeRemoveMovie from "./remove_movie";
 
@@ -21,6 +22,7 @@ import { generateId } from "../../tools/utils";
 //dependency injection
 const createMovie = makeCreateMovie({ movieDB, Movie, generateId, moment });
 const findMovie = makeFindMovie({ movieDB });
+const listMovies = makeListMovies({ movieDB });
 const modifyMovie = makeModifyMovie({ movieDB });
 const removeMovie = makeRemoveMovie({ movieDB });
 
@@ -32,6 +34,7 @@ const listPlaylist = makeListPlaylist({ movieDB });
 export default {
   createMovie,
   findMovie,
+  listMovies,
   modifyMovie,
   removeMovie,
   createPlaylist,

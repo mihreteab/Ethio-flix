@@ -5,7 +5,7 @@
   "hydra": {
     "serviceName": "bank-service",
     "serviceIP": "",
-    "servicePort": 5000,
+    "servicePort": 5006,
     "serviceType": "bank",
     "serviceDescription": "simulates bank system",
     "plugins": {

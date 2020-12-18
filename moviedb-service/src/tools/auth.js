@@ -1,11 +1,12 @@
 const bcrypt = require("bcrypt");
 const jwtAuth = require("fwsp-jwt-auth");
 
-jwtAuth.loadCerts("./src/config/server.pem", "./src/config/server.pem");
+jwtAuth.loadCerts("./src/config/server.pem", "./src/config/server.pub");
 
-async function createToken(userId, role) {
+
+async function createToken(user_id, role) {
   try {
-    const token = await jwtAuth.createAccessToken({ userId, role });
+    const token = await jwtAuth.createAccessToken({ user_id, role });
     return token;
   } catch (err) {
     console.log(err);

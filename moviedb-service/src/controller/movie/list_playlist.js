@@ -11,13 +11,19 @@ export default function makeListPlaylist({ movieLogic, assertType }) {
 
     let pl = await movieLogic.listPlaylist(param.user_id);
 
-    if (!pl) {
+    if (!pl.length) {
       return {
         status: 404,
         result: {
           msg: "Playlist Couldn't Be Found.",
         },
       };
+    }
+
+    for (let j = 0; j < pl.length; j++) {
+      for (let i = 0; i < pl[j].movies.length; i++) {
+        pl[j].movies[i] = await movieLogic.findMovie(pl[j].movies[i]);
+      }
     }
 
     return {

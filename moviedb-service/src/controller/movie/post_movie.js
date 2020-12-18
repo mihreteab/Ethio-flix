@@ -1,6 +1,6 @@
 export default function makePostMovie({ movieLogic, assertType }) {
   return async function postMovie(param) {
-    if (!assertType(param.md, "pii")) {
+    if (!assertType(param.md, "md")) {
       return {
         status: 400,
         result: {
@@ -9,7 +9,7 @@ export default function makePostMovie({ movieLogic, assertType }) {
       };
     }
 
-    let m = await movieLogic.createMovie(null, param.md);
+    let m = await movieLogic.createMovie(param.producer, param.md);
 
     if (!m) {
       return {

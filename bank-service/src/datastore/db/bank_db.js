@@ -34,9 +34,6 @@ export default function makeBankDB({ dbOps, CONFIG }) {
       filter["account_id"] = f.account_id;
     }
 
-    if (f.type) {
-      filter["type"] = f.type;
-    }
 
     let prop = {
       db: "ethioflix",

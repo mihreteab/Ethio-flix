@@ -38,6 +38,12 @@ export default function makeMovieDB({ dbOps, CONFIG }) {
       };
     }
 
+    if (f.email) {
+      filter["security"] = {
+        email: f.email,
+      };
+    }
+
     let prop = {
       db: "ethioflix",
       table: "user",

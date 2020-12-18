@@ -1,12 +1,12 @@
-export default function makeRemoveUser({ movieDB }) {
+export default function makeRemoveUser({ userDB }) {
   return async function removeUser(user_id) {
-    let u = await movieDB.readUser({ user_id }, null);
+    let u = await userDB.readUser({ user_id }, null);
 
     if (u.length != 1) {
       return 0;
     }
 
-    await movieDB.deleteUser({ user_id });
+    await userDB.deleteUser({ user_id });
 
     return u[0];
   };

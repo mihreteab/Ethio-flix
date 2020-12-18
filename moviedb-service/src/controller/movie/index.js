@@ -1,6 +1,7 @@
 //import factory modules
 import makePostMovie from "./post_movie";
 import makeGetMovie from "./get_movie";
+import makeListMovies from "./list_movies";
 import makePatchMovie from "./patch_movie";
 import makeDeleteMovie from "./delete_movie";
 
@@ -20,6 +21,7 @@ const assertType = (data, type) => {
 //dependency injection
 const postMovie = makePostMovie({ movieLogic, assertType });
 const getMovie = makeGetMovie({ movieLogic, assertType });
+const listMovies = makeListMovies({ movieLogic, assertType });
 const patchMovie = makePatchMovie({ movieLogic, assertType });
 const deleteMovie = makeDeleteMovie({ movieLogic, assertType });
 
@@ -31,6 +33,7 @@ const listPlaylist = makeListPlaylist({ movieLogic, assertType });
 export default {
   postMovie,
   getMovie,
+  listMovies,
   patchMovie,
   deleteMovie,
   postPlaylist,

@@ -23,9 +23,14 @@ function getManifestStream(path, cb) {
   cb(null, fs.createReadStream(path, { bufferSize: 64 * 1024 }));
 }
 
+function getBannerStream(path, cb) {
+  cb(null, fs.createReadStream(path, { bufferSize: 64 * 1024 }));
+}
+
 export default {
   exists,
   getManifestStream,
   getSegmentStream,
+  getBannerStream,
   getStream,
 };
